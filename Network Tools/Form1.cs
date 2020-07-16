@@ -19,6 +19,20 @@ namespace Network_Tools
             InitializeComponent();
         }
 
+        private void WhoIsButton_Click(object sender, EventArgs e)
+        {
+            WhoIsGroupBox.Visible = true;
+            WhoIsGroupBox.BringToFront();
+            portScannerGroupBox.Visible = false;
+        }
+
+        private void PortScannerButton_Click(object sender, EventArgs e)
+        {
+            WhoIsGroupBox.Visible = false;
+            portScannerGroupBox.Visible = true;
+            portScannerGroupBox.BringToFront();
+        }
+
         ///////////////////////
         // WhoIs Methods
         ///////////////////////

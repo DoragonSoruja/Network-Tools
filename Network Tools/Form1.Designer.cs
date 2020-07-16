@@ -33,7 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.addressBox = new System.Windows.Forms.TextBox();
             this.WhoIsResultBox = new System.Windows.Forms.RichTextBox();
-            this.portScanner = new System.Windows.Forms.GroupBox();
+            this.portScannerGroupBox = new System.Windows.Forms.GroupBox();
+            this.scanProgress = new System.Windows.Forms.ProgressBar();
             this.portList = new System.Windows.Forms.ListView();
             this.port = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,22 +46,23 @@
             this.newScan = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.inputIP = new System.Windows.Forms.TextBox();
-            this.scanProgress = new System.Windows.Forms.ProgressBar();
+            this.WhoIsButton = new System.Windows.Forms.Button();
+            this.PortScannerButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.WhoIsGroupBox.SuspendLayout();
-            this.portScanner.SuspendLayout();
+            this.portScannerGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // WhoIsGroupBox
             // 
-            this.WhoIsGroupBox.Controls.Add(this.portScanner);
             this.WhoIsGroupBox.Controls.Add(this.seartchButton);
             this.WhoIsGroupBox.Controls.Add(this.label1);
             this.WhoIsGroupBox.Controls.Add(this.addressBox);
             this.WhoIsGroupBox.Controls.Add(this.WhoIsResultBox);
             this.WhoIsGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WhoIsGroupBox.Location = new System.Drawing.Point(31, 60);
+            this.WhoIsGroupBox.Location = new System.Drawing.Point(31, 82);
             this.WhoIsGroupBox.Name = "WhoIsGroupBox";
-            this.WhoIsGroupBox.Size = new System.Drawing.Size(545, 513);
+            this.WhoIsGroupBox.Size = new System.Drawing.Size(545, 491);
             this.WhoIsGroupBox.TabIndex = 0;
             this.WhoIsGroupBox.TabStop = false;
             this.WhoIsGroupBox.Text = "WhoIs";
@@ -104,24 +106,34 @@
             this.WhoIsResultBox.TabIndex = 0;
             this.WhoIsResultBox.Text = "";
             // 
-            // portScanner
+            // portScannerGroupBox
             // 
-            this.portScanner.Controls.Add(this.scanProgress);
-            this.portScanner.Controls.Add(this.portList);
-            this.portScanner.Controls.Add(this.singlePorting);
-            this.portScanner.Controls.Add(this.label3);
-            this.portScanner.Controls.Add(this.port2);
-            this.portScanner.Controls.Add(this.port1);
-            this.portScanner.Controls.Add(this.label2);
-            this.portScanner.Controls.Add(this.newScan);
-            this.portScanner.Controls.Add(this.label4);
-            this.portScanner.Controls.Add(this.inputIP);
-            this.portScanner.Location = new System.Drawing.Point(0, 0);
-            this.portScanner.Name = "portScanner";
-            this.portScanner.Size = new System.Drawing.Size(545, 513);
-            this.portScanner.TabIndex = 6;
-            this.portScanner.TabStop = false;
-            this.portScanner.Text = "Port Scanner";
+            this.portScannerGroupBox.Controls.Add(this.scanProgress);
+            this.portScannerGroupBox.Controls.Add(this.portList);
+            this.portScannerGroupBox.Controls.Add(this.singlePorting);
+            this.portScannerGroupBox.Controls.Add(this.label3);
+            this.portScannerGroupBox.Controls.Add(this.port2);
+            this.portScannerGroupBox.Controls.Add(this.port1);
+            this.portScannerGroupBox.Controls.Add(this.label2);
+            this.portScannerGroupBox.Controls.Add(this.newScan);
+            this.portScannerGroupBox.Controls.Add(this.label4);
+            this.portScannerGroupBox.Controls.Add(this.inputIP);
+            this.portScannerGroupBox.Location = new System.Drawing.Point(104, 69);
+            this.portScannerGroupBox.Name = "portScannerGroupBox";
+            this.portScannerGroupBox.Size = new System.Drawing.Size(392, 504);
+            this.portScannerGroupBox.TabIndex = 6;
+            this.portScannerGroupBox.TabStop = false;
+            this.portScannerGroupBox.Text = "Port Scanner";
+            this.portScannerGroupBox.Visible = false;
+            // 
+            // scanProgress
+            // 
+            this.scanProgress.Location = new System.Drawing.Point(0, 490);
+            this.scanProgress.Name = "scanProgress";
+            this.scanProgress.Size = new System.Drawing.Size(392, 23);
+            this.scanProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.scanProgress.TabIndex = 20;
+            this.scanProgress.Visible = false;
             // 
             // portList
             // 
@@ -130,9 +142,9 @@
             this.status});
             this.portList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.portList.HideSelection = false;
-            this.portList.Location = new System.Drawing.Point(119, 157);
+            this.portList.Location = new System.Drawing.Point(46, 128);
             this.portList.Name = "portList";
-            this.portList.Size = new System.Drawing.Size(311, 308);
+            this.portList.Size = new System.Drawing.Size(311, 336);
             this.portList.TabIndex = 19;
             this.portList.UseCompatibleStateImageBehavior = false;
             this.portList.View = System.Windows.Forms.View.Details;
@@ -151,7 +163,7 @@
             // 
             this.singlePorting.AutoSize = true;
             this.singlePorting.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.singlePorting.Location = new System.Drawing.Point(119, 127);
+            this.singlePorting.Location = new System.Drawing.Point(47, 105);
             this.singlePorting.Name = "singlePorting";
             this.singlePorting.Size = new System.Drawing.Size(125, 17);
             this.singlePorting.TabIndex = 18;
@@ -163,7 +175,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(217, 101);
+            this.label3.Location = new System.Drawing.Point(145, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(19, 16);
             this.label3.TabIndex = 17;
@@ -171,25 +183,25 @@
             // 
             // port2
             // 
-            this.port2.Location = new System.Drawing.Point(242, 98);
+            this.port2.Location = new System.Drawing.Point(170, 76);
             this.port2.MaxLength = 5;
             this.port2.Name = "port2";
-            this.port2.Size = new System.Drawing.Size(44, 22);
+            this.port2.Size = new System.Drawing.Size(44, 20);
             this.port2.TabIndex = 16;
             // 
             // port1
             // 
-            this.port1.Location = new System.Drawing.Point(167, 98);
+            this.port1.Location = new System.Drawing.Point(95, 76);
             this.port1.MaxLength = 5;
             this.port1.Name = "port1";
-            this.port1.Size = new System.Drawing.Size(44, 22);
+            this.port1.Size = new System.Drawing.Size(44, 20);
             this.port1.TabIndex = 15;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(115, 98);
+            this.label2.Location = new System.Drawing.Point(43, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 20);
             this.label2.TabIndex = 14;
@@ -198,7 +210,7 @@
             // newScan
             // 
             this.newScan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newScan.Location = new System.Drawing.Point(364, 66);
+            this.newScan.Location = new System.Drawing.Point(292, 44);
             this.newScan.Name = "newScan";
             this.newScan.Size = new System.Drawing.Size(66, 27);
             this.newScan.TabIndex = 13;
@@ -210,7 +222,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(115, 68);
+            this.label4.Location = new System.Drawing.Point(43, 46);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(24, 20);
             this.label4.TabIndex = 12;
@@ -219,35 +231,59 @@
             // inputIP
             // 
             this.inputIP.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.inputIP.Location = new System.Drawing.Point(145, 68);
+            this.inputIP.Location = new System.Drawing.Point(73, 46);
             this.inputIP.Name = "inputIP";
-            this.inputIP.Size = new System.Drawing.Size(213, 22);
+            this.inputIP.Size = new System.Drawing.Size(213, 20);
             this.inputIP.TabIndex = 11;
             this.inputIP.Text = "Ex: 192.168.1.1";
             this.inputIP.Enter += new System.EventHandler(this.PorScannerInputIP_Enter);
             this.inputIP.Leave += new System.EventHandler(this.PortScannerInputIP_Leave);
             // 
-            // scanProgress
+            // WhoIsButton
             // 
-            this.scanProgress.Location = new System.Drawing.Point(0, 490);
-            this.scanProgress.Name = "scanProgress";
-            this.scanProgress.Size = new System.Drawing.Size(545, 23);
-            this.scanProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.scanProgress.TabIndex = 20;
-            this.scanProgress.Visible = false;
+            this.WhoIsButton.Location = new System.Drawing.Point(57, 21);
+            this.WhoIsButton.Name = "WhoIsButton";
+            this.WhoIsButton.Size = new System.Drawing.Size(92, 42);
+            this.WhoIsButton.TabIndex = 21;
+            this.WhoIsButton.Text = "WhoIs";
+            this.WhoIsButton.UseVisualStyleBackColor = true;
+            this.WhoIsButton.Click += new System.EventHandler(this.WhoIsButton_Click);
+            // 
+            // PortScannerButton
+            // 
+            this.PortScannerButton.Location = new System.Drawing.Point(237, 21);
+            this.PortScannerButton.Name = "PortScannerButton";
+            this.PortScannerButton.Size = new System.Drawing.Size(92, 42);
+            this.PortScannerButton.TabIndex = 22;
+            this.PortScannerButton.Text = "Port Scanner";
+            this.PortScannerButton.UseVisualStyleBackColor = true;
+            this.PortScannerButton.Click += new System.EventHandler(this.PortScannerButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(419, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(92, 42);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Network Monitor";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 602);
+            this.Controls.Add(this.portScannerGroupBox);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.PortScannerButton);
+            this.Controls.Add(this.WhoIsButton);
             this.Controls.Add(this.WhoIsGroupBox);
             this.Name = "Form1";
             this.Text = "Form1";
             this.WhoIsGroupBox.ResumeLayout(false);
             this.WhoIsGroupBox.PerformLayout();
-            this.portScanner.ResumeLayout(false);
-            this.portScanner.PerformLayout();
+            this.portScannerGroupBox.ResumeLayout(false);
+            this.portScannerGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -259,7 +295,7 @@
         private System.Windows.Forms.Button seartchButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox addressBox;
-        private System.Windows.Forms.GroupBox portScanner;
+        private System.Windows.Forms.GroupBox portScannerGroupBox;
         private System.Windows.Forms.ProgressBar scanProgress;
         private System.Windows.Forms.ListView portList;
         private System.Windows.Forms.ColumnHeader port;
@@ -272,6 +308,9 @@
         private System.Windows.Forms.Button newScan;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox inputIP;
+        private System.Windows.Forms.Button WhoIsButton;
+        private System.Windows.Forms.Button PortScannerButton;
+        private System.Windows.Forms.Button button1;
     }
 }
 
