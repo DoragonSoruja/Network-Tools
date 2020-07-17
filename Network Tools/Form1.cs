@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,16 +23,26 @@ namespace Network_Tools
 
         private void WhoIsButton_Click(object sender, EventArgs e)
         {
+            portScannerGroupBox.Visible = false;
+            NetworkMonitorGroupBox.Visible = false;
             WhoIsGroupBox.Visible = true;
             WhoIsGroupBox.BringToFront();
-            portScannerGroupBox.Visible = false;
         }
 
         private void PortScannerButton_Click(object sender, EventArgs e)
         {
             WhoIsGroupBox.Visible = false;
+            NetworkMonitorGroupBox.Visible = false;
             portScannerGroupBox.Visible = true;
             portScannerGroupBox.BringToFront();
+        }
+
+        private void NetowrkMonitorButton_Click(object sender, EventArgs e)
+        {
+            WhoIsGroupBox.Visible = false;
+            portScannerGroupBox.Visible = false;
+            NetworkMonitorGroupBox.Visible = true;
+            NetworkMonitorGroupBox.BringToFront();
         }
 
         ///////////////////////
@@ -242,6 +254,103 @@ namespace Network_Tools
             {
                 inputIP.Text = "Ex: 192.168.1.1";
                 inputIP.ForeColor = Color.Silver;
+            }
+        }
+
+        ///////////////////////
+        // Network Monitor
+        ///////////////////////
+        bool clear = true;
+        long[] buffers = new long[0];
+        Thread reader;
+
+        private void Clear(object sender, EventArgs e)
+        {
+            networkMonitorResultBox.Clear();
+            clear = true;
+        }
+
+        private void Stop_Click(object sender, EventArgs e)
+        {
+            netowrkMonitorStartAndStop.Text = "Start";
+            netowrkMonitorStartAndStop.Click -= new EventHandler(Stop_Click);
+            netowrkMonitorStartAndStop.Click += new EventHandler(Start_Click);
+            reader.Abort();
+        }
+
+        private void Start_Click(object sender, EventArgs e)
+        {
+            netowrkMonitorStartAndStop.Text = "Stop";
+
+            netowrkMonitorStartAndStop.Refresh();
+            netowrkMonitorStartAndStop.Click -= new EventHandler(Start_Click);
+            netowrkMonitorStartAndStop.Click += new EventHandler(Stop_Click);
+
+            networkMonitorResultBox.Clear();
+
+            reader = new Thread(new ThreadStart(ByteReader));
+            reader.Start();
+        }
+
+        private void ByteReader()
+        {
+            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            if (clear)
+            {
+                buffers = new long[interfaces.Length * 2];
+                int y = 0;
+                foreach (NetworkInterface x in interfaces)
+                {
+                    buffers[y] = x.GetIPv4Statistics().BytesSent;
+                    buffers[y + 1] = x.GetIPv4Statistics().BytesReceived;
+                    y += 2;
+                }
+                clear = false;
+            }
+
+            do
+            {
+                BytesSentAndReceived(buffers);
+                Thread.Sleep(1000);
+            } while (netowrkMonitorStartAndStop.Text == "Stop");
+        }
+
+        private delegate void SafeCallDelegate(string text);
+
+        public void SetText(string text)
+        {
+            if (networkMonitorResultBox.InvokeRequired)
+            {
+                var d = new SafeCallDelegate(SetText);
+                networkMonitorResultBox.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                networkMonitorResultBox.Text = text;
+            }
+        }
+
+        private void BytesSentAndReceived(long[] startPoint)
+        {
+            string tempText = "";
+
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                networkMonitorResultBox.Text += "Failed\n";
+                return;
+            }
+
+            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+
+            for (int x = 0, y = 0; x < interfaces.Length; x++, y += 2)
+            {
+                if (interfaces[x].GetIPv4Statistics().BytesSent != 0 && interfaces[x].GetIPv4Statistics().BytesReceived != 0)
+                {
+                    tempText += interfaces[x].Name + '\n';
+                    tempText += "    Bytes Sent: " + (interfaces[x].GetIPv4Statistics().BytesSent - startPoint[y]) + '\n';
+                    tempText += "    Bytes Received: " + (interfaces[x].GetIPv4Statistics().BytesReceived - startPoint[y + 1]) + "\n\n";
+                    SetText(tempText);
+                }
             }
         }
     }

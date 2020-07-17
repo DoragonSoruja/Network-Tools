@@ -34,6 +34,7 @@
             this.addressBox = new System.Windows.Forms.TextBox();
             this.WhoIsResultBox = new System.Windows.Forms.RichTextBox();
             this.portScannerGroupBox = new System.Windows.Forms.GroupBox();
+            this.NetworkMonitorGroupBox = new System.Windows.Forms.GroupBox();
             this.scanProgress = new System.Windows.Forms.ProgressBar();
             this.portList = new System.Windows.Forms.ListView();
             this.port = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -48,9 +49,13 @@
             this.inputIP = new System.Windows.Forms.TextBox();
             this.WhoIsButton = new System.Windows.Forms.Button();
             this.PortScannerButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.NetworkMonitorButton = new System.Windows.Forms.Button();
+            this.netowrkMonitorClear = new System.Windows.Forms.Button();
+            this.netowrkMonitorStartAndStop = new System.Windows.Forms.Button();
+            this.networkMonitorResultBox = new System.Windows.Forms.RichTextBox();
             this.WhoIsGroupBox.SuspendLayout();
             this.portScannerGroupBox.SuspendLayout();
+            this.NetworkMonitorGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // WhoIsGroupBox
@@ -125,6 +130,19 @@
             this.portScannerGroupBox.TabStop = false;
             this.portScannerGroupBox.Text = "Port Scanner";
             this.portScannerGroupBox.Visible = false;
+            // 
+            // NetworkMonitorGroupBox
+            // 
+            this.NetworkMonitorGroupBox.Controls.Add(this.netowrkMonitorClear);
+            this.NetworkMonitorGroupBox.Controls.Add(this.netowrkMonitorStartAndStop);
+            this.NetworkMonitorGroupBox.Controls.Add(this.networkMonitorResultBox);
+            this.NetworkMonitorGroupBox.Location = new System.Drawing.Point(79, 69);
+            this.NetworkMonitorGroupBox.Name = "NetworkMonitorGroupBox";
+            this.NetworkMonitorGroupBox.Size = new System.Drawing.Size(457, 495);
+            this.NetworkMonitorGroupBox.TabIndex = 24;
+            this.NetworkMonitorGroupBox.TabStop = false;
+            this.NetworkMonitorGroupBox.Text = "Network Monitor";
+            this.NetworkMonitorGroupBox.Visible = false;
             // 
             // scanProgress
             // 
@@ -259,31 +277,63 @@
             this.PortScannerButton.UseVisualStyleBackColor = true;
             this.PortScannerButton.Click += new System.EventHandler(this.PortScannerButton_Click);
             // 
-            // button1
+            // NetworkMonitorButton
             // 
-            this.button1.Location = new System.Drawing.Point(419, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 42);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "Network Monitor";
-            this.button1.UseVisualStyleBackColor = true;
+            this.NetworkMonitorButton.Location = new System.Drawing.Point(419, 21);
+            this.NetworkMonitorButton.Name = "NetworkMonitorButton";
+            this.NetworkMonitorButton.Size = new System.Drawing.Size(92, 42);
+            this.NetworkMonitorButton.TabIndex = 23;
+            this.NetworkMonitorButton.Text = "Network Monitor";
+            this.NetworkMonitorButton.UseVisualStyleBackColor = true;
+            this.NetworkMonitorButton.Click += new System.EventHandler(this.NetowrkMonitorButton_Click);
+            // 
+            // netowrkMonitorClear
+            // 
+            this.netowrkMonitorClear.Location = new System.Drawing.Point(302, 52);
+            this.netowrkMonitorClear.Name = "netowrkMonitorClear";
+            this.netowrkMonitorClear.Size = new System.Drawing.Size(57, 20);
+            this.netowrkMonitorClear.TabIndex = 5;
+            this.netowrkMonitorClear.Text = "Clear";
+            this.netowrkMonitorClear.UseVisualStyleBackColor = true;
+            this.netowrkMonitorClear.Click += new System.EventHandler(this.Clear);
+            // 
+            // netowrkMonitorStartAndStop
+            // 
+            this.netowrkMonitorStartAndStop.Location = new System.Drawing.Point(158, 46);
+            this.netowrkMonitorStartAndStop.Name = "netowrkMonitorStartAndStop";
+            this.netowrkMonitorStartAndStop.Size = new System.Drawing.Size(88, 32);
+            this.netowrkMonitorStartAndStop.TabIndex = 4;
+            this.netowrkMonitorStartAndStop.Text = "Start";
+            this.netowrkMonitorStartAndStop.UseVisualStyleBackColor = true;
+            this.netowrkMonitorStartAndStop.Click += new System.EventHandler(this.Start_Click);
+            // 
+            // networkMonitorResultBox
+            // 
+            this.networkMonitorResultBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.networkMonitorResultBox.Location = new System.Drawing.Point(27, 93);
+            this.networkMonitorResultBox.Name = "networkMonitorResultBox";
+            this.networkMonitorResultBox.Size = new System.Drawing.Size(390, 356);
+            this.networkMonitorResultBox.TabIndex = 3;
+            this.networkMonitorResultBox.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 602);
+            this.Controls.Add(this.NetworkMonitorGroupBox);
             this.Controls.Add(this.portScannerGroupBox);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.NetworkMonitorButton);
             this.Controls.Add(this.PortScannerButton);
             this.Controls.Add(this.WhoIsButton);
             this.Controls.Add(this.WhoIsGroupBox);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Netowrk Tools";
             this.WhoIsGroupBox.ResumeLayout(false);
             this.WhoIsGroupBox.PerformLayout();
             this.portScannerGroupBox.ResumeLayout(false);
             this.portScannerGroupBox.PerformLayout();
+            this.NetworkMonitorGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -310,7 +360,11 @@
         private System.Windows.Forms.TextBox inputIP;
         private System.Windows.Forms.Button WhoIsButton;
         private System.Windows.Forms.Button PortScannerButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button NetworkMonitorButton;
+        private System.Windows.Forms.GroupBox NetworkMonitorGroupBox;
+        private System.Windows.Forms.Button netowrkMonitorClear;
+        private System.Windows.Forms.Button netowrkMonitorStartAndStop;
+        private System.Windows.Forms.RichTextBox networkMonitorResultBox;
     }
 }
 
